@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "1019732156654",
-    "firebase_url": "https://daslim-896ad.firebaseio.com",
-    "project_id": "daslim-896ad",
-    "storage_bucket": "daslim-896ad.appspot.com"
+    "project_number": "662484491861",
+    "firebase_url": "https://daslim-5629d.firebaseio.com",
+    "project_id": "daslim-5629d",
+    "storage_bucket": "daslim-5629d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1019732156654:android:4b203c10e3a2c195",
+        "mobilesdk_app_id": "1:662484491861:android:4b203c10e3a2c195",
         "android_client_info": {
           "package_name": "kr.or.fowi.daslim.daslim"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1019732156654-p4cedl0hc42no0vqain8qj50v9m85h8g.apps.googleusercontent.com",
+          "client_id": "662484491861-t82ktmsklfqbfvcrq3u88rajeg2bf6jt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD78N0HjUo5zUmuVRVDsC4OgVW0uJIoi5w"
+          "current_key": "AIzaSyCjt6fdTAUMn262fPijf5Wis4DdRe1w8Jg"
         }
       ],
       "services": {
