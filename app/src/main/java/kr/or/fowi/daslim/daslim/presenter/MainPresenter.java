@@ -5,7 +5,10 @@ package kr.or.fowi.daslim.daslim.presenter;
  */
 
 public interface MainPresenter {
+    void checkLogined();
+
     interface View {
 
+        void startLogin();
     }
 }

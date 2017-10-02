@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1019732156654",
+    "firebase_url": "https://daslim-896ad.firebaseio.com",
+    "project_id": "daslim-896ad",
+    "storage_bucket": "daslim-896ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019732156654:android:4b203c10e3a2c195",
+        "android_client_info": {
+          "package_name": "kr.or.fowi.daslim.daslim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019732156654-p4cedl0hc42no0vqain8qj50v9m85h8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD78N0HjUo5zUmuVRVDsC4OgVW0uJIoi5w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
