@@ -18,11 +18,13 @@ import kr.or.fowi.daslim.daslim.base.BaseActivity;
 import kr.or.fowi.daslim.daslim.databinding.ActivityMainBinding;
 import kr.or.fowi.daslim.daslim.presenter.MainPresenter;
 import kr.or.fowi.daslim.daslim.presenter.MainPresenterImpl;
+import kr.or.fowi.daslim.daslim.view.adapter.ViewPagerAdapter;
 
 public class MainActivity extends BaseActivity implements MainPresenter.View {
 
     private ActivityMainBinding binding;
     private MainPresenter presenter;
+    private ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,20 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
         setupFab();
         setupDrawerLayout();
         setupNavigationView();
+        setupViewPager();
+    }
+
+    private void setupViewPager() {
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        binding.appBarMain.contentMain.viewPager.setAdapter(adapter);
+        binding.appBarMain.contentMain.tabLayout.setupWithViewPager(binding.appBarMain.contentMain.viewPager);
+
+
+        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello");
+        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello2");
+        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello3");
+        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello4");
+        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello5");
     }
 
     @Override
@@ -50,29 +66,26 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
 
     private void setupNavigationView() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
 
-                if (id == R.id.nav_camera) {
-                    // Handle the camera action
-                } else if (id == R.id.nav_gallery) {
+            if (id == R.id.nav_camera) {
+                // Handle the camera action
+            } else if (id == R.id.nav_gallery) {
 
-                } else if (id == R.id.nav_slideshow) {
+            } else if (id == R.id.nav_slideshow) {
 
-                } else if (id == R.id.nav_manage) {
+            } else if (id == R.id.nav_manage) {
 
-                } else if (id == R.id.nav_share) {
+            } else if (id == R.id.nav_share) {
 
-                } else if (id == R.id.nav_send) {
+            } else if (id == R.id.nav_send) {
 
-                }
-
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawer.closeDrawer(GravityCompat.START);
-                return false;
             }
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return false;
         });
     }
 
@@ -85,13 +98,8 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
     }
 
     private void setupFab() {
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        binding.appBarMain.fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
     }
 
     private void setupToolbar() {
