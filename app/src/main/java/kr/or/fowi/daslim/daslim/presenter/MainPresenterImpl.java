@@ -8,7 +8,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.karrel.mylibrary.RLog;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import kr.or.fowi.daslim.daslim.etc.LoginManager;
+import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
+import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 
 /**
  * Created by kimmihye on 2017. 10. 1..
@@ -39,13 +44,21 @@ public class MainPresenterImpl implements MainPresenter {
         mQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                view.clearFragment();
+
                 Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
-                RLog.d("dataSnapshot key > " + dataSnapshot.getKey());
-                RLog.d("dataSnapshot value > " + dataSnapshot.getValue());
 
                 for (DataSnapshot snapshot : iterable) {
-                    RLog.d("key > " + snapshot.getKey());
-                    RLog.d("value > " + snapshot.getValue());
+                    List<ScheduleInfoItem> list = new ArrayList<>();
+                    for (int i = 0; i < snapshot.getChildrenCount(); i++) {
+                        ScheduleInfoItem infoItem = snapshot.child(i + 1 + "").getValue(ScheduleInfoItem.class);
+                        list.add(infoItem);
+                        RLog.e("infoItem.toString() > " + infoItem.toString());
+                    }
+                    ScheduleInfo info = new ScheduleInfo(snapshot.getKey(), list);
+                    RLog.d("info.toString() > " + info.toString());
+
+                    view.addFragment(info);
                 }
             }
 

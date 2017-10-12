@@ -11,9 +11,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import kr.or.fowi.daslim.daslim.R;
 import kr.or.fowi.daslim.daslim.base.BaseActivity;
 import kr.or.fowi.daslim.daslim.databinding.ActivityMainBinding;
+import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
+import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import kr.or.fowi.daslim.daslim.presenter.MainPresenter;
 import kr.or.fowi.daslim.daslim.presenter.MainPresenterImpl;
 import kr.or.fowi.daslim.daslim.view.adapter.SchedulePagerAdapter;
@@ -49,11 +54,16 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
         binding.appBarMain.contentMain.tabLayout.setupWithViewPager(binding.appBarMain.contentMain.viewPager);
 
 
-        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello");
-        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello2");
-        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello3");
-        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello4");
-        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello5");
+        // TODO: 2017. 10. 12. 데이터 추가
+//        List<ScheduleInfoItem> scheduleInfoItems = new ArrayList<>();
+//        scheduleInfoItems.add(new ScheduleInfoItem("1", "28/30", "10시 - 12시"));
+//        scheduleInfoItems.add(new ScheduleInfoItem("2", "28/30", "10시 - 12시"));
+//        scheduleInfoItems.add(new ScheduleInfoItem("3", "28/30", "10시 - 12시"));
+//
+//        adapter.addFragment(ScheduleFragment.newInstance(new ScheduleInfo("하늘", scheduleInfoItems)));
+//        adapter.addFragment(ScheduleFragment.newInstance(new ScheduleInfo("바다", scheduleInfoItems)));
+//        adapter.addFragment(ScheduleFragment.newInstance(new ScheduleInfo("구름", scheduleInfoItems)));
+//        adapter.addFragment(ScheduleFragment.newInstance(new ScheduleInfo("사막", scheduleInfoItems)));
     }
 
     @Override
@@ -140,5 +150,15 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
     public void startLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void addFragment(ScheduleInfo info) {
+        adapter.addFragment(ScheduleFragment.newInstance(info));
+    }
+
+    @Override
+    public void clearFragment() {
+        adapter.clearFragments();
     }
 }

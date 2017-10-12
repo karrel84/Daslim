@@ -3,6 +3,7 @@ package kr.or.fowi.daslim.daslim.view;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -12,14 +13,13 @@ import android.view.ViewGroup;
 import kr.or.fowi.daslim.daslim.R;
 import kr.or.fowi.daslim.daslim.databinding.FragmentScheduleBinding;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
+import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import kr.or.fowi.daslim.daslim.presenter.SchedulePresenter;
 import kr.or.fowi.daslim.daslim.presenter.SchedulePresenterImpl;
 import kr.or.fowi.daslim.daslim.view.adapter.ScheduleListAdapter;
 
 
 public class ScheduleFragment extends Fragment implements SchedulePresenter.View {
-    private static final String SCHEDULE_INFO = "SCHEDULE_INFO";
-
     // presenter
     private SchedulePresenter presenter;
     // binding
@@ -27,18 +27,15 @@ public class ScheduleFragment extends Fragment implements SchedulePresenter.View
     // adapter
     private ScheduleListAdapter adapter;
 
-
-    public ScheduleFragment() {
+    public ScheduleFragment(ScheduleInfo info) {
         presenter = new SchedulePresenterImpl(this);
+        presenter.setData(info);
     }
 
     public static ScheduleFragment newInstance(ScheduleInfo info) {
         // param must be not null!!
-        if(info == null) throw new RuntimeException("parameter must be not null!!");
-        ScheduleFragment fragment = new ScheduleFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(SCHEDULE_INFO, info);
-        fragment.setArguments(args);
+        if (info == null) throw new RuntimeException("parameter must be not null!!");
+        ScheduleFragment fragment = new ScheduleFragment(info);
         return fragment;
     }
 
@@ -50,10 +47,6 @@ public class ScheduleFragment extends Fragment implements SchedulePresenter.View
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            ScheduleInfo info = getArguments().getParcelable(SCHEDULE_INFO);
-            presenter.setData(info);
-        }
     }
 
     @Override
@@ -64,6 +57,13 @@ public class ScheduleFragment extends Fragment implements SchedulePresenter.View
         // setup adapter
         setupAdapter();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        presenter.onViewCreated();
     }
 
     @Override
@@ -78,5 +78,15 @@ public class ScheduleFragment extends Fragment implements SchedulePresenter.View
         adapter = new ScheduleListAdapter();
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void addInfoItem(ScheduleInfoItem item) {
+        // 아답터에 아이템을 추가하자
+        adapter.addItem(item);
+    }
+
+    public String getTitle() {
+        return presenter.getTitle();
     }
 }

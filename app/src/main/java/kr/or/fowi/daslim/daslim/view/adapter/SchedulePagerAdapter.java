@@ -36,9 +36,15 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
         return titles.get(position);
     }
 
-    public void addFragment(ScheduleFragment tabFragment, String title) {
+    public void addFragment(ScheduleFragment tabFragment) {
         fragments.add(tabFragment);
-        titles.add(title);
+        titles.add(tabFragment.getTitle());
+        notifyDataSetChanged();
+    }
+
+    public void clearFragments() {
+        fragments.clear();
+        titles.clear();
         notifyDataSetChanged();
     }
 }
