@@ -3,9 +3,7 @@ package kr.or.fowi.daslim.daslim.view;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,13 +16,13 @@ import kr.or.fowi.daslim.daslim.base.BaseActivity;
 import kr.or.fowi.daslim.daslim.databinding.ActivityMainBinding;
 import kr.or.fowi.daslim.daslim.presenter.MainPresenter;
 import kr.or.fowi.daslim.daslim.presenter.MainPresenterImpl;
-import kr.or.fowi.daslim.daslim.view.adapter.ViewPagerAdapter;
+import kr.or.fowi.daslim.daslim.view.adapter.SchedulePagerAdapter;
 
 public class MainActivity extends BaseActivity implements MainPresenter.View {
 
     private ActivityMainBinding binding;
     private MainPresenter presenter;
-    private ViewPagerAdapter adapter;
+    private SchedulePagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +44,16 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
     }
 
     private void setupViewPager() {
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new SchedulePagerAdapter(getSupportFragmentManager());
         binding.appBarMain.contentMain.viewPager.setAdapter(adapter);
         binding.appBarMain.contentMain.tabLayout.setupWithViewPager(binding.appBarMain.contentMain.viewPager);
 
 
-        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello");
-        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello2");
-        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello3");
-        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello4");
-        adapter.addFragment(TabFragment.newInstance("hello", "nice"), "hello5");
+        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello");
+        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello2");
+        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello3");
+        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello4");
+        adapter.addFragment(ScheduleFragment.newInstance("hello", "nice"), "hello5");
     }
 
     @Override

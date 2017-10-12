@@ -7,17 +7,17 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.or.fowi.daslim.daslim.view.TabFragment;
+import kr.or.fowi.daslim.daslim.view.ScheduleFragment;
 
 /**
  * Created by Rell on 2017. 10. 11..
  */
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
     private final List<Fragment> fragments = new ArrayList<>();
     private final List<String> titles = new ArrayList<>();
 
-    public ViewPagerAdapter(FragmentManager fm) {
+    public SchedulePagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -36,7 +36,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         return titles.get(position);
     }
 
-    public void addFragment(TabFragment tabFragment, String title) {
+    public void addFragment(ScheduleFragment tabFragment, String title) {
         fragments.add(tabFragment);
         titles.add(title);
         notifyDataSetChanged();
