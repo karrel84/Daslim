@@ -8,25 +8,20 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class ScheduleInfoItem {
-    // 예약수
-    public long size;
-    // 시간
+    public String index;
+    public long curCount;
+    public long maxCount;
+    public String status;
     public String time;
+
 
     public ScheduleInfoItem() {
     }
 
-    public ScheduleInfoItem(long size, String time) {
-        this.size = size;
+    public ScheduleInfoItem(long curCount, long maxCount, String status, String time) {
+        this.curCount = curCount;
+        this.maxCount = maxCount;
+        this.status = status;
         this.time = time;
-    }
-
-
-    @Override
-    public String toString() {
-        return "ScheduleInfoItem{" +
-                "size=" + size +
-                ", time='" + time + '\'' +
-                '}';
     }
 }

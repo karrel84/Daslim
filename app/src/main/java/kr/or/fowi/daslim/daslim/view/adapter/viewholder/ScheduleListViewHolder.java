@@ -1,6 +1,7 @@
 package kr.or.fowi.daslim.daslim.view.adapter.viewholder;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import kr.or.fowi.daslim.daslim.databinding.ItemScheduleBinding;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
@@ -16,16 +17,21 @@ public class ScheduleListViewHolder extends RecyclerView.ViewHolder {
     public ScheduleListViewHolder(ItemScheduleBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
+        binding.getRoot().setOnClickListener(onItemClickListener);
     }
 
     public void setItem(ScheduleInfoItem item) {
         this.item = item;
 
         // 회차
-//        binding.sequence.setText(item.index);
+        binding.sequence.setText(String.format("%s회", item.index));
         // 시간
         binding.time.setText(item.time);
         // 정원
-        binding.to.setText(item.size + "");
+        binding.to.setText(String.format("%s/%s", item.curCount, item.maxCount));
     }
+
+    private final View.OnClickListener onItemClickListener = view -> {
+
+    };
 }

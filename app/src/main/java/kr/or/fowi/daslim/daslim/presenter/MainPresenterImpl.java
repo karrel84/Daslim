@@ -51,7 +51,9 @@ public class MainPresenterImpl implements MainPresenter {
                 for (DataSnapshot snapshot : iterable) {
                     List<ScheduleInfoItem> list = new ArrayList<>();
                     for (int i = 0; i < snapshot.getChildrenCount(); i++) {
-                        ScheduleInfoItem infoItem = snapshot.child(i + 1 + "").getValue(ScheduleInfoItem.class);
+                        final String key = i + 1 + "";
+                        ScheduleInfoItem infoItem = snapshot.child(key).getValue(ScheduleInfoItem.class);
+                        infoItem.index = key;
                         list.add(infoItem);
                         RLog.e("infoItem.toString() > " + infoItem.toString());
                     }
