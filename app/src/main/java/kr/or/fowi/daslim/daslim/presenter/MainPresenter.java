@@ -1,5 +1,7 @@
 package kr.or.fowi.daslim.daslim.presenter;
 
+import java.util.List;
+
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 
 /**
@@ -13,8 +15,8 @@ public interface MainPresenter {
 
         void startLogin();
 
-        void addFragment(ScheduleInfo info);
-
         void clearFragment();
+
+        void setFragment(List<ScheduleInfo> scheduleInfos);
     }
 }

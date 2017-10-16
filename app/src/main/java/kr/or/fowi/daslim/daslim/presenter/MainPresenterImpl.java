@@ -11,9 +11,15 @@ import com.karrel.mylibrary.RLog;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.or.fowi.daslim.daslim.etc.DataManger;
 import kr.or.fowi.daslim.daslim.etc.LoginManager;
+import kr.or.fowi.daslim.daslim.event.FirebaseEvent;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by kimmihye on 2017. 10. 1..
@@ -36,38 +42,22 @@ public class MainPresenterImpl implements MainPresenter {
         mReference = mDatabase.getReference();
 
         subscribeScheduleEvent();
+        DataManger.getInstance();
     }
 
     private void subscribeScheduleEvent() {
-        RLog.e("subscribeScheduleEvent");
-        mQuery = mReference.child("schedule");
-        mQuery.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                view.clearFragment();
+        // 혀냊 블루투스의 연결상태의 변경을 수신한다
+        Observable<List<ScheduleInfo>> observable = FirebaseEvent.getInstance().getObservable();
+        observable
+                .onBackpressureDrop()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .distinct();
 
-                Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
-
-                for (DataSnapshot snapshot : iterable) {
-                    List<ScheduleInfoItem> list = new ArrayList<>();
-                    for (int i = 0; i < snapshot.getChildrenCount(); i++) {
-                        final String key = i + 1 + "";
-                        ScheduleInfoItem infoItem = snapshot.child(key).getValue(ScheduleInfoItem.class);
-                        infoItem.index = key;
-                        list.add(infoItem);
-                        RLog.e("infoItem.toString() > " + infoItem.toString());
-                    }
-                    ScheduleInfo info = new ScheduleInfo(snapshot.getKey(), list);
-                    RLog.d("info.toString() > " + info.toString());
-
-                    view.addFragment(info);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+        observable.subscribe(scheduleInfos -> {
+            view.clearFragment();
+            RLog.d("scheduleInfos > " + scheduleInfos);
+            view.setFragment(scheduleInfos);
         });
     }
 

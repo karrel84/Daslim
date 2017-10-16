@@ -80,12 +80,14 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
     }
 
     @Override
-    public void addFragment(ScheduleInfo info) {
-        adapter.addFragment(ScheduleFragment.newInstance(info));
+    public void clearFragment() {
+        adapter.clearFragments();
     }
 
     @Override
-    public void clearFragment() {
-        adapter.clearFragments();
+    public void setFragment(List<ScheduleInfo> scheduleInfos) {
+        for (ScheduleInfo info : scheduleInfos){
+            adapter.addFragment(ScheduleFragment.newInstance(info));
+        }
     }
 }

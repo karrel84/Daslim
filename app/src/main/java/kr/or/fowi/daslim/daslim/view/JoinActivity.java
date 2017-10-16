@@ -20,4 +20,9 @@ public class JoinActivity extends BaseActivity implements JoinPresenter.View {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_join);
         presenter = new JoinPresenterImpl(this);
     }
+
+    @Override
+    protected void onLoadOnce() {
+        super.onLoadOnce();
+    }
 }

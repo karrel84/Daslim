@@ -5,7 +5,7 @@ package kr.or.fowi.daslim.daslim.model;
  */
 
 public class UserInfo {
-    int id;
-    int password;
-    int name;
+    String nickName;
+    String name;
+    String telNumber;
 }

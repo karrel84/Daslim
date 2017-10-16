@@ -30,21 +30,13 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View {
     protected void onLoadOnce() {
         super.onLoadOnce();
         // login
-        binding.login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String id = binding.loginIdText.getText().toString();
-                final String pw = binding.loginPwText.getText().toString();
-                presenter.login(id, pw);
-            }
+        binding.login.setOnClickListener(view -> {
+            final String id = binding.loginIdText.getText().toString();
+            final String pw = binding.loginPwText.getText().toString();
+            presenter.login(id, pw);
         });
         // clicked join
-        binding.join.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.join();
-            }
-        });
+        binding.join.setOnClickListener(view -> presenter.join());
     }
 
     @Override
@@ -52,4 +44,3 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View {
         startActivity(new Intent(this, JoinActivity.class));
     }
 }
-
