@@ -25,8 +25,9 @@ import android.preference.PreferenceManager;
  * */
 public enum PP {
 
-	 LOGIN_ID
-	, LOGIN_PW
+	 name
+	, nick
+	, tel
 	;
 
 	private static final String DEFVALUE_STRING = "";

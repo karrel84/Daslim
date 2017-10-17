@@ -3,6 +3,7 @@ package kr.or.fowi.daslim.daslim.event;
 import java.util.List;
 
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
+import kr.or.fowi.daslim.daslim.model.UserInfo;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 
@@ -12,22 +13,33 @@ import rx.subjects.PublishSubject;
 
 public class FirebaseEvent {
     private static FirebaseEvent mInstance = new FirebaseEvent();
-    public PublishSubject<List<ScheduleInfo>> mSubject;
+    public PublishSubject<List<ScheduleInfo>> mScheduleSubject;
+    public PublishSubject<List<UserInfo>> mUserInfoSubject;
 
     private FirebaseEvent() {
-        mSubject = PublishSubject.create();
+        mScheduleSubject = PublishSubject.create();
+        mUserInfoSubject = PublishSubject.create();
+
     }
 
     public static FirebaseEvent getInstance() {
         return mInstance;
     }
 
-    public void sendEvent(List<ScheduleInfo> msg) {
-        mSubject.onNext(msg);
+    public void sendScheduleEvent(List<ScheduleInfo> msg) {
+        mScheduleSubject.onNext(msg);
     }
 
-    public Observable<List<ScheduleInfo>> getObservable() {
-        return mSubject;
+    public void sendUserEvent(List<UserInfo> msg) {
+        mUserInfoSubject.onNext(msg);
+    }
+
+    public Observable<List<ScheduleInfo>> getSheduleObservable() {
+        return mScheduleSubject;
+    }
+
+    public Observable<List<ScheduleInfo>> getUserObservable() {
+        return mScheduleSubject;
     }
 
 }

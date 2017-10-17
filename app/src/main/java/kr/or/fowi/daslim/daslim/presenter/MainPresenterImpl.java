@@ -47,7 +47,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     private void subscribeScheduleEvent() {
         // 혀냊 블루투스의 연결상태의 변경을 수신한다
-        Observable<List<ScheduleInfo>> observable = FirebaseEvent.getInstance().getObservable();
+        Observable<List<ScheduleInfo>> observable = FirebaseEvent.getInstance().getSheduleObservable();
         observable
                 .onBackpressureDrop()
                 .subscribeOn(Schedulers.newThread())
@@ -63,7 +63,6 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void checkLogined() {
-        // TODO: 2017. 10. 2. 로그인이 되어있는지 체크
         RLog.d("checkLogined");
         if (!loginManager.isLogined()) {
             view.startLogin();

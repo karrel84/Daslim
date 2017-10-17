@@ -1,15 +1,15 @@
 package kr.or.fowi.daslim.daslim.etc;
 
+import com.karrel.mylibrary.RLog;
+
 /**
  * Created by Rell on 2017. 10. 2..
  */
 
 public class LoginManager {
     private static LoginManager manager;
-    private boolean isLogined;
 
     public LoginManager() {
-        this.isLogined = false;
     }
 
     public static LoginManager getInstance() {
@@ -19,12 +19,20 @@ public class LoginManager {
         return manager;
     }
 
-    public boolean login(String id, String pw) {
+    public boolean login(String name, String nick) {
+        PP.name.set(name);
+        PP.nick.set(nick);
 
         return true;
     }
 
     public boolean isLogined() {
-        return isLogined;
+        boolean haveName = !PP.name.get().isEmpty();
+        boolean haveNick = !PP.nick.get().isEmpty();
+
+        RLog.d(String.format("haveName : %s, haveNick : %s", haveName, haveNick));
+
+        // 저장된 이름과 닉이 있으면 로그인되어있는거로 하자
+        return haveName && haveNick;
     }
 }

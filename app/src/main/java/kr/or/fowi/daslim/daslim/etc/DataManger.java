@@ -14,6 +14,7 @@ import java.util.List;
 import kr.or.fowi.daslim.daslim.event.FirebaseEvent;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
+import kr.or.fowi.daslim.daslim.model.UserInfo;
 
 /**
  * Created by Rell on 2017. 10. 16..
@@ -27,6 +28,7 @@ public class DataManger {
     private static DataManger instance = new DataManger();
 
     private List<ScheduleInfo> scheduleInfoList;
+    private List<UserInfo> userInfos;
 
     public static DataManger getInstance() {
         return instance;
@@ -37,12 +39,47 @@ public class DataManger {
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference();
 
-        scheduleInfoList = new ArrayList<>();
+        // 스케쥴 수신
         subscribeScheduleEvent();
+        // 유저정보 수신
+        subscribeUserEvent();
+    }
+
+    private void subscribeUserEvent() {
+        userInfos = new ArrayList<>();
+        mQuery = mReference.child("user");
+        mQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                RLog.e("subscribeUserEvent");
+
+                // clear list
+                if (!userInfos.isEmpty()) userInfos.clear();
+
+                Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
+                for (DataSnapshot s : iterable) {
+                    String name = s.child("name").getValue(String.class);
+                    String nick = s.child("nick").getValue(String.class);
+                    String tel = s.child("tel").getValue(String.class);
+
+                    UserInfo infoItem = new UserInfo(name, nick, tel);
+                    userInfos.add(infoItem);
+                    RLog.d("user value : " + infoItem.toString());
+                }
+
+                FirebaseEvent.getInstance().sendUserEvent(userInfos);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
     private void subscribeScheduleEvent() {
+        scheduleInfoList = new ArrayList<>();
         RLog.e("subscribeScheduleEvent");
         mQuery = mReference.child("schedule");
         mQuery.addValueEventListener(new ValueEventListener() {
@@ -68,7 +105,7 @@ public class DataManger {
                     scheduleInfoList.add(info);
                 }
 
-                FirebaseEvent.getInstance().sendEvent(scheduleInfoList);
+                FirebaseEvent.getInstance().sendScheduleEvent(scheduleInfoList);
             }
 
             @Override

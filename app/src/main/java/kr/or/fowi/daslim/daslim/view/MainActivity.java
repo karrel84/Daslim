@@ -41,6 +41,7 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
     protected void onLoadOnce() {
         super.onLoadOnce();
 
+        presenter.checkLogined();
         setupToolbar();
         setupViewPager();
     }
@@ -49,18 +50,6 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
         adapter = new SchedulePagerAdapter(getSupportFragmentManager());
         binding.viewPager.setAdapter(adapter);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
-
-
-        // TODO: 2017. 10. 12. 데이터 추가
-//        List<ScheduleInfoItem> scheduleInfoItems = new ArrayList<>();
-//        scheduleInfoItems.add(new ScheduleInfoItem("1", "28/30", "10시 - 12시"));
-//        scheduleInfoItems.add(new ScheduleInfoItem("2", "28/30", "10시 - 12시"));
-//        scheduleInfoItems.add(new ScheduleInfoItem("3", "28/30", "10시 - 12시"));
-//
-//        adapter.addFragment(ScheduleFragment.newInstance(new ScheduleInfo("하늘", scheduleInfoItems)));
-//        adapter.addFragment(ScheduleFragment.newInstance(new ScheduleInfo("바다", scheduleInfoItems)));
-//        adapter.addFragment(ScheduleFragment.newInstance(new ScheduleInfo("구름", scheduleInfoItems)));
-//        adapter.addFragment(ScheduleFragment.newInstance(new ScheduleInfo("사막", scheduleInfoItems)));
     }
 
     @Override
@@ -75,7 +64,7 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
 
     @Override
     public void startLogin() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, JoinActivity.class);
         startActivity(intent);
     }
 
