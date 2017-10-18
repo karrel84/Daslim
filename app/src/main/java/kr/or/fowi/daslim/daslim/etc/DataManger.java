@@ -114,4 +114,9 @@ public class DataManger {
             }
         });
     }
+
+    public void join(String name, String nick, String telNumber) {
+        UserInfo info = new UserInfo(name, nick, telNumber);
+        mReference.child("user").child(name).setValue(info);
+    }
 }

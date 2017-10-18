@@ -27,6 +27,11 @@ public class LoginManager {
     }
 
     public boolean isLogined() {
+        final String name = PP.name.get();
+        final String nick = PP.nick.get();
+        // 이름이나 닉네임이 저장된게 없으면 false 를 리턴한다
+        if (name == null || nick == null) return false;
+
         boolean haveName = !PP.name.get().isEmpty();
         boolean haveNick = !PP.nick.get().isEmpty();
 

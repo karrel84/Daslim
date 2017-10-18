@@ -13,5 +13,7 @@ public interface JoinPresenter {
     interface View {
 
         Context getContext();
+
+        void showMessage(String s);
     }
 }

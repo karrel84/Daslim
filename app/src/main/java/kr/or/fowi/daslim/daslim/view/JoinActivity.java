@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import kr.or.fowi.daslim.daslim.R;
 import kr.or.fowi.daslim.daslim.base.BaseActivity;
@@ -46,5 +47,10 @@ public class JoinActivity extends BaseActivity implements JoinPresenter.View {
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @Override
+    public void showMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }
