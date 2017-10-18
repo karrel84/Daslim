@@ -38,8 +38,8 @@ public class FirebaseEvent {
         return mScheduleSubject;
     }
 
-    public Observable<List<ScheduleInfo>> getUserObservable() {
-        return mScheduleSubject;
+    public Observable<List<UserInfo>> getUserObservable() {
+        return mUserInfoSubject;
     }
 
 }

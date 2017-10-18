@@ -10,10 +10,18 @@ public interface JoinPresenter {
 
     void join(String name, String nick);
 
+    void changedNick(String s);
+
     interface View {
 
         Context getContext();
 
         void showMessage(String s);
+
+        void finish();
+
+        void duplicatedNick();
+
+        void enableNick();
     }
 }

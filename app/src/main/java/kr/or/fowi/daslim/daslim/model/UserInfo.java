@@ -9,11 +9,11 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class UserInfo {
     // 이름
-    String name;
+    public String name;
     // 닉네임
-    String nick;
+    public String nick;
     // 전화번호
-    String tel;
+    public String tel;
 
     public UserInfo(String name, String nick, String tel) {
         this.name = name;

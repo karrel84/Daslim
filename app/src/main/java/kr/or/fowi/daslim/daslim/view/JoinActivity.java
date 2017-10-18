@@ -3,6 +3,8 @@ package kr.or.fowi.daslim.daslim.view;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,6 +39,23 @@ public class JoinActivity extends BaseActivity implements JoinPresenter.View {
             // join
             presenter.join(name, nick);
         });
+
+        binding.nick.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                presenter.changedNick(editable.toString());
+            }
+        });
     }
 
     @Override
@@ -52,5 +71,15 @@ public class JoinActivity extends BaseActivity implements JoinPresenter.View {
     @Override
     public void showMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void duplicatedNick() {
+        binding.nickNameLayout.setError("사용할 수 없는 닉네임입니다.");
+    }
+
+    @Override
+    public void enableNick() {
+
     }
 }
