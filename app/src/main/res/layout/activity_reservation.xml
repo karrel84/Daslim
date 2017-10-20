@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context="kr.or.fowi.daslim.daslim.view.ReservationActivity">
+
+        <TextView
+            android:id="@+id/nameClass"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="클래스"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtClass"
+            style="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="8dp"
+            android:textColor="#000000"
+            app:layout_constraintLeft_toLeftOf="@+id/nameClass"
+            app:layout_constraintTop_toBottomOf="@+id/nameClass"
+            tools:text="바다" />
+
+        <TextView
+            android:id="@+id/nameCount"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="회차"
+            app:layout_constraintLeft_toLeftOf="@+id/nameClass"
+            app:layout_constraintTop_toBottomOf="@+id/txtClass" />
+
+        <TextView
+            android:id="@+id/txtCount"
+            style="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="8dp"
+            android:textColor="#000000"
+            app:layout_constraintLeft_toLeftOf="@+id/nameClass"
+            app:layout_constraintTop_toBottomOf="@+id/nameCount"
+            tools:text="1회" />
+
+
+        <TextView
+            android:id="@+id/nameTime"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="시간"
+            app:layout_constraintLeft_toLeftOf="@+id/nameClass"
+            app:layout_constraintTop_toBottomOf="@+id/txtCount" />
+
+        <TextView
+            android:id="@+id/txtTime"
+            style="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="8dp"
+            android:textColor="#000000"
+            app:layout_constraintLeft_toLeftOf="@+id/nameClass"
+            app:layout_constraintTop_toBottomOf="@+id/nameTime"
+            tools:text="10 ~ 11시" />
+
+        <TextView
+            android:id="@+id/nameNumPeople"
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="시간"
+            app:layout_constraintLeft_toLeftOf="@+id/nameClass"
+            app:layout_constraintTop_toBottomOf="@+id/txtTime" />
+
+        <Spinner
+            android:id="@+id/txtNumPeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#000000"
+            app:layout_constraintLeft_toLeftOf="@+id/nameClass"
+            app:layout_constraintTop_toBottomOf="@+id/nameNumPeople" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

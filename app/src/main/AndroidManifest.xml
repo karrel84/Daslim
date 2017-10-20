@@ -6,8 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".base.BaseApplication"
@@ -31,9 +30,12 @@
             android:name=".view.LoginActivity"
             android:label="로그인" />
         <activity
-            android:label="회원가입"
             android:name=".view.JoinActivity"
-            android:parentActivityName=".view.LoginActivity"></activity>
+            android:label="회원가입"
+            android:parentActivityName=".view.LoginActivity" />
+        <activity
+            android:theme="@style/Dialog"
+            android:name=".view.ReservationActivity"></activity>
     </application>
 
 </manifest>
