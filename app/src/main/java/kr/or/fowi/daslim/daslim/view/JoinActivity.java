@@ -75,11 +75,12 @@ public class JoinActivity extends BaseActivity implements JoinPresenter.View {
 
     @Override
     public void duplicatedNick() {
+        binding.nickNameLayout.setErrorEnabled(true);
         binding.nickNameLayout.setError("사용할 수 없는 닉네임입니다.");
     }
 
     @Override
     public void enableNick() {
-
+        binding.nickNameLayout.setErrorEnabled(false);
     }
 }

@@ -3,6 +3,7 @@ package kr.or.fowi.daslim.daslim.presenter;
 import android.Manifest;
 import android.content.Context;
 import android.telephony.TelephonyManager;
+import android.util.Pair;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -77,6 +78,10 @@ public class JoinPresenterImpl implements JoinPresenter {
         // 유효성 체크
         boolean isValid = checkValid(name, nick);
         if (!isValid) return;
+        if (isDuplicateNick(nick)) {
+            view.showMessage("사용할 수 없는 닉네임입니다.");
+            return;
+        }
 
         this.name = name;
         this.nick = nick;
@@ -87,9 +92,27 @@ public class JoinPresenterImpl implements JoinPresenter {
 
     @Override
     public void changedNick(String nick) {
+        RLog.d(String.format("changedNick(%s)", nick));
         if (userInfos == null) return;
 
         // 같은 닉테임이 있는지 테스트
+        boolean haveNick;
+        try {
+            haveNick = isDuplicateNick(nick);
+        } catch (RuntimeException e) {
+            view.showMessage(e.getMessage());
+            return;
+        }
+
+        RLog.d("userInfos = " + userInfos);
+
+        if (haveNick) view.duplicatedNick();
+        else view.enableNick();
+    }
+
+    private boolean isDuplicateNick(String nick) {
+        if (userInfos == null) throw new RuntimeException("유저정보가 없습니다.");
+
         boolean haveNick = false;
         for (UserInfo info : userInfos) {
             if (info.nick.equals(nick)) {
@@ -97,9 +120,7 @@ public class JoinPresenterImpl implements JoinPresenter {
                 break;
             }
         }
-
-        if(haveNick) view.duplicatedNick();
-        else view.enableNick();
+        return haveNick;
     }
 
     PermissionListener permissionlistener = new PermissionListener() {
