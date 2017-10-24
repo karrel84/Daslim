@@ -36,6 +36,8 @@ public class ScheduleListViewHolder extends RecyclerView.ViewHolder {
 
     private final View.OnClickListener onItemClickListener = view -> {
         final Context context = binding.getRoot().getContext();
-        context.startActivity(new Intent(context, ReservationActivity.class));
+        Intent intent = new Intent(context, ReservationActivity.class);
+        intent.putExtra("item", item);
+        context.startActivity(intent);
     };
 }

@@ -96,6 +96,7 @@ public class DataManger {
                         final String key = i + 1 + "";
                         ScheduleInfoItem infoItem = snapshot.child(key).getValue(ScheduleInfoItem.class);
                         infoItem.index = key;
+                        infoItem.className = snapshot.getKey();
                         list.add(infoItem);
                         RLog.e("infoItem.toString() > " + infoItem.toString());
                     }

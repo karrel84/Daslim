@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:padding="16dp"
         tools:context="kr.or.fowi.daslim.daslim.view.ReservationActivity">
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="시간"
+            android:text="인원"
             app:layout_constraintLeft_toLeftOf="@+id/nameClass"
             app:layout_constraintTop_toBottomOf="@+id/txtTime" />
 
@@ -89,10 +89,31 @@
             android:id="@+id/txtNumPeople"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_marginTop="4dp"
             android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/cancel"
             app:layout_constraintLeft_toLeftOf="@+id/nameClass"
             app:layout_constraintTop_toBottomOf="@+id/nameNumPeople" />
+
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/ok" />
+
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="예약하기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/cancel"
+            app:layout_constraintRight_toRightOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
