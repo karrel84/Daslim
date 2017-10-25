@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.or.fowi.daslim.daslim.event.FirebaseEvent;
+import kr.or.fowi.daslim.daslim.model.ReservationItem;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import kr.or.fowi.daslim.daslim.model.UserInfo;
@@ -119,5 +120,25 @@ public class DataManger {
     public void join(String name, String nick, String telNumber) {
         UserInfo info = new UserInfo(name, nick, telNumber);
         mReference.child("user").child(name).setValue(info);
+    }
+
+    public void reservation(ReservationItem item) {
+        item.userId = getUserId();
+        item.userName = getUserName();
+        item.userTelNum = getUserTel();
+
+        mReference.child("schedule").child(item.className).child(item.index).child("reservation").child(item.userId).setValue(item);
+    }
+
+    public String getUserName() {
+        return PP.name.get();
+    }
+
+    public String getUserId() {
+        return PP.nick.get();
+    }
+
+    public String getUserTel(){
+        return PP.tel.get();
     }
 }

@@ -2,6 +2,8 @@ package kr.or.fowi.daslim.daslim.view;
 
 import com.karrel.mylibrary.RLog;
 
+import kr.or.fowi.daslim.daslim.etc.DataManger;
+import kr.or.fowi.daslim.daslim.model.ReservationItem;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import kr.or.fowi.daslim.daslim.presenter.ReservationPresenter;
 
@@ -12,9 +14,12 @@ import kr.or.fowi.daslim.daslim.presenter.ReservationPresenter;
 public class ReservationPresenterImpl implements ReservationPresenter {
     private ReservationPresenter.View view;
     private ScheduleInfoItem item;
+    private DataManger manager;
+
 
     public ReservationPresenterImpl(View view) {
         this.view = view;
+        manager = DataManger.getInstance();
     }
 
     @Override
@@ -24,6 +29,9 @@ public class ReservationPresenterImpl implements ReservationPresenter {
 
     @Override
     public void reservation(int people) {
+        ReservationItem item = new ReservationItem(people, this.item.className, this.item.index);
+        item.people = people;
+        manager.reservation(item);
         RLog.d(String.format("reservation(%s)", people));
     }
 
