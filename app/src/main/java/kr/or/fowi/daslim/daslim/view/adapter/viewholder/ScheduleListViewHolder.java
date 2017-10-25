@@ -27,14 +27,19 @@ public class ScheduleListViewHolder extends RecyclerView.ViewHolder {
         this.item = item;
 
         // 회차
-        binding.sequence.setText(String.format("%s회", item.index));
+        binding.sequence.setText(item.index);
         // 시간
         binding.time.setText(item.time);
         // 정원
-        binding.to.setText(String.format("%s/%s", item.curCount, item.maxCount));
+        binding.to.setText(String.format("%s/%s", item.reserveCount, item.maxReserve));
     }
 
     private final View.OnClickListener onItemClickListener = view -> {
+        // TODO: 2017. 10. 25. 예약이 가능한 상태인지 체크
+
+        // TODO: 2017. 10. 25. 취소해야하는건지 체크
+
+
         final Context context = binding.getRoot().getContext();
         Intent intent = new Intent(context, ReservationActivity.class);
         intent.putExtra("item", item);

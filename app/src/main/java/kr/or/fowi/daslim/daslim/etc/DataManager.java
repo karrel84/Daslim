@@ -21,21 +21,21 @@ import kr.or.fowi.daslim.daslim.model.UserInfo;
  * Created by Rell on 2017. 10. 16..
  */
 
-public class DataManger {
+public class DataManager {
     private DatabaseReference mReference;
     private FirebaseDatabase mDatabase;
     private Query mQuery;
 
-    private static DataManger instance = new DataManger();
+    private static DataManager instance = new DataManager();
 
     private List<ScheduleInfo> scheduleInfoList;
     private List<UserInfo> userInfos;
 
-    public static DataManger getInstance() {
+    public static DataManager getInstance() {
         return instance;
     }
 
-    public DataManger() {
+    public DataManager() {
         // 파이어베이스
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference();
@@ -90,19 +90,23 @@ public class DataManger {
                 // clear list
                 if (!scheduleInfoList.isEmpty()) scheduleInfoList.clear();
 
-                Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
-                for (DataSnapshot snapshot : iterable) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    // 바다, 강, 들 이런 클래스 이름
                     List<ScheduleInfoItem> list = new ArrayList<>();
-                    for (int i = 0; i < snapshot.getChildrenCount(); i++) {
-                        final String key = i + 1 + "";
-                        ScheduleInfoItem infoItem = snapshot.child(key).getValue(ScheduleInfoItem.class);
-                        infoItem.index = key;
-                        infoItem.className = snapshot.getKey();
+                    for (DataSnapshot indexItem : snapshot.getChildren()) {
+                        // 1회, 2회, 3회
+
+                        ScheduleInfoItem infoItem = new ScheduleInfoItem();
+                        infoItem.className = (String) indexItem.child("className").getValue();
+                        infoItem.index = (String) indexItem.child("index").getValue();
+                        infoItem.maxReserve = (long) indexItem.child("maxReserve").getValue();
+                        infoItem.reserveCount = (long) indexItem.child("reserveCount").getValue();
+                        infoItem.time = (String) indexItem.child("time").getValue();
+
                         list.add(infoItem);
-                        RLog.e("infoItem.toString() > " + infoItem.toString());
+                        RLog.d(infoItem.toString());
                     }
                     ScheduleInfo info = new ScheduleInfo(snapshot.getKey(), list);
-                    RLog.d("info.toString() > " + info.toString());
 
                     scheduleInfoList.add(info);
                 }
@@ -138,7 +142,7 @@ public class DataManger {
         return PP.nick.get();
     }
 
-    public String getUserTel(){
+    public String getUserTel() {
         return PP.tel.get();
     }
 }

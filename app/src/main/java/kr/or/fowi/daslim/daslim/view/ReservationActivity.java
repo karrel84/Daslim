@@ -2,7 +2,6 @@ package kr.or.fowi.daslim.daslim.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -45,13 +44,10 @@ public class ReservationActivity extends BaseActivity implements ReservationPres
 
     private void setupButtons() {
         binding.cancel.setOnClickListener(view -> finish());
-        binding.ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int people = binding.txtNumPeople.getSelectedItemPosition() + 1;
+        binding.ok.setOnClickListener(view -> {
+            int people = binding.txtNumPeople.getSelectedItemPosition() + 1;
 
-                presenter.reservation(people);
-            }
+            presenter.reservation(people);
         });
     }
 

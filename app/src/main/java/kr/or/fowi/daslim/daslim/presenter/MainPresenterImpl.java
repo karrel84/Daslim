@@ -1,24 +1,18 @@
 package kr.or.fowi.daslim.daslim.presenter;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.karrel.mylibrary.RLog;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import kr.or.fowi.daslim.daslim.etc.DataManger;
+import kr.or.fowi.daslim.daslim.etc.DataManager;
 import kr.or.fowi.daslim.daslim.etc.LoginManager;
 import kr.or.fowi.daslim.daslim.event.FirebaseEvent;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
-import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -42,7 +36,7 @@ public class MainPresenterImpl implements MainPresenter {
         mReference = mDatabase.getReference();
 
         subscribeScheduleEvent();
-        DataManger.getInstance();
+        DataManager.getInstance();
     }
 
     private void subscribeScheduleEvent() {

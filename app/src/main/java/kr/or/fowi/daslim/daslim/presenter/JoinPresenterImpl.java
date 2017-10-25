@@ -3,7 +3,6 @@ package kr.or.fowi.daslim.daslim.presenter;
 import android.Manifest;
 import android.content.Context;
 import android.telephony.TelephonyManager;
-import android.util.Pair;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -12,7 +11,7 @@ import com.karrel.mylibrary.RLog;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.or.fowi.daslim.daslim.etc.DataManger;
+import kr.or.fowi.daslim.daslim.etc.DataManager;
 import kr.or.fowi.daslim.daslim.etc.PP;
 import kr.or.fowi.daslim.daslim.event.FirebaseEvent;
 import kr.or.fowi.daslim.daslim.model.UserInfo;
@@ -26,13 +25,13 @@ import rx.schedulers.Schedulers;
 
 public class JoinPresenterImpl implements JoinPresenter {
     private JoinPresenter.View view;
-    private DataManger dataManger;
+    private DataManager dataManger;
     private String telNumber, name, nick;
     private List<UserInfo> userInfos;
 
     public JoinPresenterImpl(View view) {
         this.view = view;
-        dataManger = DataManger.getInstance();
+        dataManger = DataManager.getInstance();
 
         TedPermission.with(view.getContext())
                 .setPermissionListener(permissionlistener)

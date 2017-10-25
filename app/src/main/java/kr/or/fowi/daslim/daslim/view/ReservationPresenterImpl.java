@@ -2,7 +2,7 @@ package kr.or.fowi.daslim.daslim.view;
 
 import com.karrel.mylibrary.RLog;
 
-import kr.or.fowi.daslim.daslim.etc.DataManger;
+import kr.or.fowi.daslim.daslim.etc.DataManager;
 import kr.or.fowi.daslim.daslim.model.ReservationItem;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import kr.or.fowi.daslim.daslim.presenter.ReservationPresenter;
@@ -14,12 +14,12 @@ import kr.or.fowi.daslim.daslim.presenter.ReservationPresenter;
 public class ReservationPresenterImpl implements ReservationPresenter {
     private ReservationPresenter.View view;
     private ScheduleInfoItem item;
-    private DataManger manager;
+    private DataManager manager;
 
 
     public ReservationPresenterImpl(View view) {
         this.view = view;
-        manager = DataManger.getInstance();
+        manager = DataManager.getInstance();
     }
 
     @Override
@@ -29,6 +29,7 @@ public class ReservationPresenterImpl implements ReservationPresenter {
 
     @Override
     public void reservation(int people) {
+
         ReservationItem item = new ReservationItem(people, this.item.className, this.item.index);
         item.people = people;
         manager.reservation(item);
@@ -47,7 +48,7 @@ public class ReservationPresenterImpl implements ReservationPresenter {
         view.setTime(item.time);
 
         // setup 인원
-        int count = (int) (item.maxCount - item.curCount);
+        int count = (int) (item.maxReserve - item.reserveCount);
         if (count > 10) count = 10;
         view.setMaxPeople(count);
     }

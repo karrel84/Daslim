@@ -13,29 +13,43 @@ import com.google.firebase.database.IgnoreExtraProperties;
 public class ScheduleInfoItem implements Parcelable {
     public String className; // 바다, 들, 강
     public String index; // 1회, 2회, 3회
-    public long curCount; // 현재참여 인원
-    public long maxCount; // 최대 참여 인원
-    public String status;
+    public long reserveCount; // 현재참여 인원
+    public long maxReserve; // 최대 참여 인원
     public String time; // 진행 시간
 
 
     public ScheduleInfoItem() {
     }
 
-    public ScheduleInfoItem(long curCount, long maxCount, String status, String time) {
-        this.curCount = curCount;
-        this.maxCount = maxCount;
-        this.status = status;
+    public ScheduleInfoItem(long maxReserve, long reserveCount, String index, String className, String time) {
+        this.className = className;
+        this.index = index;
+        this.reserveCount = reserveCount;
+        this.maxReserve = maxReserve;
         this.time = time;
     }
 
+
     protected ScheduleInfoItem(Parcel in) {
-        index = in.readString();
-        curCount = in.readLong();
-        maxCount = in.readLong();
-        status = in.readString();
-        time = in.readString();
         className = in.readString();
+        index = in.readString();
+        reserveCount = in.readLong();
+        maxReserve = in.readLong();
+        time = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(className);
+        dest.writeString(index);
+        dest.writeLong(reserveCount);
+        dest.writeLong(maxReserve);
+        dest.writeString(time);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<ScheduleInfoItem> CREATOR = new Creator<ScheduleInfoItem>() {
@@ -51,36 +65,13 @@ public class ScheduleInfoItem implements Parcelable {
     };
 
     @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(index);
-        parcel.writeLong(curCount);
-        parcel.writeLong(maxCount);
-        parcel.writeString(status);
-        parcel.writeString(time);
-        parcel.writeString(className);
-    }
-
-    @Override
     public String toString() {
         return "ScheduleInfoItem{" +
                 "className='" + className + '\'' +
-                ", curCount=" + curCount +
                 ", index='" + index + '\'' +
-                ", maxCount=" + maxCount +
-                ", status='" + status + '\'' +
+                ", maxReserve=" + maxReserve +
+                ", reserveCount=" + reserveCount +
                 ", time='" + time + '\'' +
                 '}';
     }
-
-
-    public void setClass(String className) {
-
-    }
-
-
 }
