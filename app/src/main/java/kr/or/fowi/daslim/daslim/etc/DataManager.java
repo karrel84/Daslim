@@ -105,6 +105,12 @@ public class DataManager {
 
                         list.add(infoItem);
                         RLog.d(infoItem.toString());
+
+                        for (DataSnapshot reservationUsers : indexItem.getChildren()) {
+                            String nick = reservationUsers.getKey();
+                            ReservationItem reservationItem = reservationUsers.getValue(ReservationItem.class);
+                            infoItem.addReservationInfo(nick, reservationItem);
+                        }
                     }
                     ScheduleInfo info = new ScheduleInfo(snapshot.getKey(), list);
 
@@ -128,7 +134,7 @@ public class DataManager {
 
     public void reservation(ReservationItem item) {
         item.userId = getUserId();
-        item.userName = getUserName();
+        item.userNick = getUserName();
         item.userTelNum = getUserTel();
 
         mReference.child("schedule").child(item.className).child(item.index).child("reservation").child(item.userId).setValue(item);

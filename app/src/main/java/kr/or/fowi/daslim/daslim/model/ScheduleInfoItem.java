@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Rell on 2017. 10. 12..
  */
@@ -16,12 +19,15 @@ public class ScheduleInfoItem implements Parcelable {
     public long reserveCount; // 현재참여 인원
     public long maxReserve; // 최대 참여 인원
     public String time; // 진행 시간
+    public Map<String, ReservationItem> reservationItemMap;
 
 
     public ScheduleInfoItem() {
+        reservationItemMap = new HashMap<>();
     }
 
     public ScheduleInfoItem(long maxReserve, long reserveCount, String index, String className, String time) {
+        reservationItemMap = new HashMap<>();
         this.className = className;
         this.index = index;
         this.reserveCount = reserveCount;
@@ -73,5 +79,9 @@ public class ScheduleInfoItem implements Parcelable {
                 ", reserveCount=" + reserveCount +
                 ", time='" + time + '\'' +
                 '}';
+    }
+
+    public void addReservationInfo(String nick, ReservationItem reservationItem) {
+        reservationItemMap.put(nick, reservationItem);
     }
 }

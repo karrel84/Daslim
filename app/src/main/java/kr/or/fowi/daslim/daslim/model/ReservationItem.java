@@ -11,7 +11,7 @@ public class ReservationItem {
     public int people;
     public String className; // 바다, 들, 강
     public String index; // 1회, 2회, 3회
-    public String userName;
+    public String userNick;
     public String userId;
     public String userTelNum;
 
