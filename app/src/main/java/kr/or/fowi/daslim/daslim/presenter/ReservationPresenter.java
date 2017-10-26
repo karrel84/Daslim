@@ -22,5 +22,7 @@ public interface ReservationPresenter {
         void setTime(String time);
 
         void setMaxPeople(int count);
+
+        void finish();
     }
 }

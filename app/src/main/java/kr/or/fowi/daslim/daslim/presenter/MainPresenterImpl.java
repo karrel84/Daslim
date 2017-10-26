@@ -41,14 +41,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     private void subscribeScheduleEvent() {
         // 혀냊 블루투스의 연결상태의 변경을 수신한다
-        Observable<List<ScheduleInfo>> observable = FirebaseEvent.getInstance().getSheduleObservable();
-        observable
-                .onBackpressureDrop()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .distinct();
-
-        observable.subscribe(scheduleInfos -> {
+        FirebaseEvent.getInstance().getSheduleObservable().subscribe(scheduleInfos -> {
             view.clearFragment();
             RLog.d("scheduleInfos > " + scheduleInfos);
             view.setFragment(scheduleInfos);

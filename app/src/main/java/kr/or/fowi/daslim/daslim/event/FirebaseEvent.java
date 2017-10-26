@@ -5,6 +5,8 @@ import java.util.List;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 import kr.or.fowi.daslim.daslim.model.UserInfo;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 /**
@@ -35,7 +37,14 @@ public class FirebaseEvent {
     }
 
     public Observable<List<ScheduleInfo>> getSheduleObservable() {
-        return mScheduleSubject;
+        Observable<List<ScheduleInfo>> observable = mScheduleSubject;
+        observable
+                .onBackpressureDrop()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .distinct();
+
+        return observable;
     }
 
     public Observable<List<UserInfo>> getUserObservable() {

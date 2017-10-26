@@ -2,11 +2,17 @@ package kr.or.fowi.daslim.daslim.view;
 
 import com.karrel.mylibrary.RLog;
 
+import java.util.List;
+
 import kr.or.fowi.daslim.daslim.etc.DataManager;
 import kr.or.fowi.daslim.daslim.event.FirebaseEvent;
 import kr.or.fowi.daslim.daslim.model.ReservationItem;
+import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import kr.or.fowi.daslim.daslim.presenter.ReservationPresenter;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Rell on 2017. 10. 24..
@@ -21,7 +27,8 @@ public class ReservationPresenterImpl implements ReservationPresenter {
     public ReservationPresenterImpl(View view) {
         this.view = view;
         manager = DataManager.getInstance();
-    };
+
+    }
 
     @Override
     public void setScheduleInfoItem(ScheduleInfoItem item) {
@@ -35,6 +42,7 @@ public class ReservationPresenterImpl implements ReservationPresenter {
         mReserveItem.people = people;
         manager.reservation(mReserveItem);
         RLog.d(String.format("reservation(%s)", people));
+        view.finish();
     }
 
     @Override
