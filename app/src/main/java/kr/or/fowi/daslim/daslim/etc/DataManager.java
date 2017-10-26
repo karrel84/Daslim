@@ -106,9 +106,17 @@ public class DataManager {
                         list.add(infoItem);
                         RLog.d(infoItem.toString());
 
-                        for (DataSnapshot reservationUsers : indexItem.getChildren()) {
+                        for (DataSnapshot reservationUsers : indexItem.child("reservation").getChildren()) {
                             String nick = reservationUsers.getKey();
-                            ReservationItem reservationItem = reservationUsers.getValue(ReservationItem.class);
+                            RLog.d(reservationUsers.toString());
+                            ReservationItem reservationItem  = new ReservationItem();
+                            reservationItem.people = (long) reservationUsers.child("people").getValue();
+                            reservationItem.className = (String) reservationUsers.child("className").getValue();
+                            reservationItem.index = (String) reservationUsers.child("index").getValue();
+                            reservationItem.userNick = (String) reservationUsers.child("userNick").getValue();
+                            reservationItem.userId = (String) reservationUsers.child("userId").getValue();
+                            reservationItem.userTelNum = (String) reservationUsers.child("userTelNum").getValue();
+
                             infoItem.addReservationInfo(nick, reservationItem);
                         }
                     }
@@ -133,7 +141,7 @@ public class DataManager {
     }
 
     public void reservation(ReservationItem item) {
-        item.userId = getUserId();
+        item.userId = getUserNick();
         item.userNick = getUserName();
         item.userTelNum = getUserTel();
 
@@ -144,7 +152,7 @@ public class DataManager {
         return PP.name.get();
     }
 
-    public String getUserId() {
+    public String getUserNick() {
         return PP.nick.get();
     }
 

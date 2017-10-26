@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import kr.or.fowi.daslim.daslim.databinding.ItemScheduleBinding;
+import kr.or.fowi.daslim.daslim.etc.DataManager;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import kr.or.fowi.daslim.daslim.view.ReservationActivity;
 
@@ -32,6 +33,20 @@ public class ScheduleListViewHolder extends RecyclerView.ViewHolder {
         binding.time.setText(item.time);
         // 정원
         binding.to.setText(String.format("%s/%s", item.reserveCount, item.maxReserve));
+
+        // 상태
+        binding.status.setText(getStatus(item));
+    }
+
+    private String getStatus(ScheduleInfoItem item) {
+
+        if (item.isReservationed()) return "예약됨";
+
+        if (item.maxReserve - item.reserveCount > 0) {
+            return "예약가능";
+        } else {
+            return "마감";
+        }
     }
 
     private final View.OnClickListener onItemClickListener = view -> {

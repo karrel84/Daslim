@@ -8,6 +8,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.or.fowi.daslim.daslim.etc.DataManager;
+
 /**
  * Created by Rell on 2017. 10. 12..
  */
@@ -83,5 +85,15 @@ public class ScheduleInfoItem implements Parcelable {
 
     public void addReservationInfo(String nick, ReservationItem reservationItem) {
         reservationItemMap.put(nick, reservationItem);
+    }
+
+    public boolean isReservationed() {
+        if (reservationItemMap == null) return false;
+
+        for (String key : reservationItemMap.keySet()) {
+            if (DataManager.getInstance().getUserNick().equals(key)) return true;
+        }
+
+        return false;
     }
 }

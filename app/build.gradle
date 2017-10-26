@@ -3,17 +3,13 @@ buildscript {
         jcenter()
     }
 
-    dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:3.3.0-beta3'
-    }
 }
 
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "kr.or.fowi.daslim.daslim"
         minSdkVersion 15
