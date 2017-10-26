@@ -100,16 +100,16 @@ public class DataManager {
                         infoItem.className = (String) indexItem.child("className").getValue();
                         infoItem.index = (String) indexItem.child("index").getValue();
                         infoItem.maxReserve = (long) indexItem.child("maxReserve").getValue();
-                        infoItem.reserveCount = (long) indexItem.child("reserveCount").getValue();
                         infoItem.time = (String) indexItem.child("time").getValue();
 
                         list.add(infoItem);
                         RLog.d(infoItem.toString());
 
+                        int reserveCount = 0;
                         for (DataSnapshot reservationUsers : indexItem.child("reservation").getChildren()) {
                             String nick = reservationUsers.getKey();
                             RLog.d(reservationUsers.toString());
-                            ReservationItem reservationItem  = new ReservationItem();
+                            ReservationItem reservationItem = new ReservationItem();
                             reservationItem.people = (long) reservationUsers.child("people").getValue();
                             reservationItem.className = (String) reservationUsers.child("className").getValue();
                             reservationItem.index = (String) reservationUsers.child("index").getValue();
@@ -118,7 +118,11 @@ public class DataManager {
                             reservationItem.userTelNum = (String) reservationUsers.child("userTelNum").getValue();
 
                             infoItem.addReservationInfo(nick, reservationItem);
+
+                            reserveCount += reservationItem.people;
                         }
+                        // 예약된 인원을 합산해서 넣는다.
+                        infoItem.reserveCount = reserveCount;
                     }
                     ScheduleInfo info = new ScheduleInfo(snapshot.getKey(), list);
 
@@ -158,5 +162,10 @@ public class DataManager {
 
     public String getUserTel() {
         return PP.tel.get();
+    }
+
+    public void cancelReservation(String className, String index) {
+        String nick = getUserNick();
+        mReference.child("schedule").child(className).child(index).child("reservation").child(nick).removeValue();
     }
 }

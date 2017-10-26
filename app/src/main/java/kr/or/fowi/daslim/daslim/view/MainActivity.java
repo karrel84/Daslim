@@ -78,5 +78,6 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
         for (ScheduleInfo info : scheduleInfos){
             adapter.addFragment(ScheduleFragment.newInstance(info));
         }
+        adapter.notifyDataSetChanged();
     }
 }
