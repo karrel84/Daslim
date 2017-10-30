@@ -41,7 +41,6 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
     protected void onLoadOnce() {
         super.onLoadOnce();
 
-        presenter.checkLogined();
         setupToolbar();
         setupViewPager();
     }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import kr.or.fowi.daslim.daslim.R;
 import kr.or.fowi.daslim.daslim.databinding.FragmentScheduleBinding;
+import kr.or.fowi.daslim.daslim.model.ReservationItem;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import kr.or.fowi.daslim.daslim.presenter.SchedulePresenter;
@@ -84,6 +85,11 @@ public class ScheduleFragment extends Fragment implements SchedulePresenter.View
     public void addInfoItem(ScheduleInfoItem item) {
         // 아답터에 아이템을 추가하자
         adapter.addItem(item);
+    }
+
+    @Override
+    public void addReserveItem(ReservationItem item) {
+        adapter.addReserveItem(item);
     }
 
     public String getTitle() {

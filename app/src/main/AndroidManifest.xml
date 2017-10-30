@@ -27,9 +27,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.LoginActivity"
-            android:label="로그인" />
-        <activity
             android:name=".view.JoinActivity"
             android:label="회원가입"
             android:parentActivityName=".view.LoginActivity" />

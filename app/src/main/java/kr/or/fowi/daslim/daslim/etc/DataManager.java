@@ -93,6 +93,10 @@ public class DataManager {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // 바다, 강, 들 이런 클래스 이름
                     List<ScheduleInfoItem> list = new ArrayList<>();
+
+                    // 내 예약 정보
+                    List<ReservationItem> myReservation = new ArrayList<>();
+
                     for (DataSnapshot indexItem : snapshot.getChildren()) {
                         // 1회, 2회, 3회
 
@@ -120,6 +124,8 @@ public class DataManager {
                             infoItem.addReservationInfo(nick, reservationItem);
 
                             reserveCount += reservationItem.people;
+
+                            // 나의 예약정보이면 따로저장한다
                         }
                         // 예약된 인원을 합산해서 넣는다.
                         infoItem.reserveCount = reserveCount;

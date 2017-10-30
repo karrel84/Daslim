@@ -96,4 +96,13 @@ public class ScheduleInfoItem implements Parcelable {
 
         return false;
     }
+
+    public ReservationItem getReservationInfo() {
+        for (String key : reservationItemMap.keySet()) {
+            if (DataManager.getInstance().getUserNick().equals(key)) {
+                return reservationItemMap.get(key);
+            }
+        }
+        return null;
+    }
 }

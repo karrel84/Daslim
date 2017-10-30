@@ -26,6 +26,12 @@ public class SchedulePresenterImpl implements SchedulePresenter {
         for (ScheduleInfoItem item : scheduleInfo.scheduleInfoItems) {
             view.addInfoItem(item);
         }
+
+        for (ScheduleInfoItem item : scheduleInfo.scheduleInfoItems) {
+            if(item.isReservationed()){
+                view.addReserveItem(item.getReservationInfo());
+            }
+        }
     }
 
     @Override

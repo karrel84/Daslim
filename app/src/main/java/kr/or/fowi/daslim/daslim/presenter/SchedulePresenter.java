@@ -1,5 +1,6 @@
 package kr.or.fowi.daslim.daslim.presenter;
 
+import kr.or.fowi.daslim.daslim.model.ReservationItem;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 
@@ -17,5 +18,7 @@ public interface SchedulePresenter {
     interface View {
 
         void addInfoItem(ScheduleInfoItem item);
+
+        void addReserveItem(ReservationItem item);
     }
 }
