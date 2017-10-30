@@ -26,7 +26,7 @@ public class ReserveContentViewHolder extends RecyclerView.ViewHolder {
         // 회차
         binding.sequence.setText(item.index);
         // 시간
-//        binding.time.setText(item.time);
+        binding.time.setText(item.time);
         // 정원
         binding.people.setText(item.people + "명");
 

@@ -94,9 +94,6 @@ public class DataManager {
                     // 바다, 강, 들 이런 클래스 이름
                     List<ScheduleInfoItem> list = new ArrayList<>();
 
-                    // 내 예약 정보
-                    List<ReservationItem> myReservation = new ArrayList<>();
-
                     for (DataSnapshot indexItem : snapshot.getChildren()) {
                         // 1회, 2회, 3회
 
@@ -120,6 +117,7 @@ public class DataManager {
                             reservationItem.userNick = (String) reservationUsers.child("userNick").getValue();
                             reservationItem.userId = (String) reservationUsers.child("userId").getValue();
                             reservationItem.userTelNum = (String) reservationUsers.child("userTelNum").getValue();
+                            reservationItem.time = infoItem.time;
 
                             infoItem.addReservationInfo(nick, reservationItem);
 

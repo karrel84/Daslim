@@ -14,14 +14,16 @@ public class ReservationItem {
     public String userNick;
     public String userId;
     public String userTelNum;
+    public String time;
 
     public ReservationItem() {
     }
 
-    public ReservationItem(long people, String className, String index) {
+    public ReservationItem(long people, String className, String index, String time) {
         this.people = people;
         this.className = className;
         this.index = index;
+        this.time = time;
     }
 
 

@@ -38,7 +38,7 @@ public class ReservationPresenterImpl implements ReservationPresenter {
     @Override
     public void reservation(int people) {
 
-        mReserveItem = new ReservationItem(people, this.item.className, this.item.index);
+        mReserveItem = new ReservationItem(people, this.item.className, this.item.index, this.item.time);
         mReserveItem.people = people;
         manager.reservation(mReserveItem);
         RLog.d(String.format("reservation(%s)", people));
