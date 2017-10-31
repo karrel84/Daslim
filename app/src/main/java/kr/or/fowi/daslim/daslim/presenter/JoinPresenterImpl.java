@@ -2,6 +2,8 @@ package kr.or.fowi.daslim.daslim.presenter;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 
 import com.gun0912.tedpermission.PermissionListener;
@@ -26,7 +28,7 @@ import rx.schedulers.Schedulers;
 public class JoinPresenterImpl implements JoinPresenter {
     private JoinPresenter.View view;
     private DataManager dataManger;
-    private String telNumber, name, nick;
+    private String telNumber = "", name, nick;
     private List<UserInfo> userInfos;
 
     public JoinPresenterImpl(View view) {
@@ -125,7 +127,7 @@ public class JoinPresenterImpl implements JoinPresenter {
     PermissionListener permissionlistener = new PermissionListener() {
         @Override
         public void onPermissionGranted() {
-            telNumber = getPhoneNumber();
+//            telNumber = getPhoneNumber();
             RLog.d("telNumber : " + telNumber);
         }
 
@@ -149,8 +151,8 @@ public class JoinPresenterImpl implements JoinPresenter {
         return true;
     }
 
-    private String getPhoneNumber() {
-        TelephonyManager t = (TelephonyManager) view.getContext().getSystemService(Context.TELEPHONY_SERVICE);
-        return t.getLine1Number();
-    }
+//    private String getPhoneNumber() {
+//        TelephonyManager t = (TelephonyManager) view.getContext().getSystemService(Context.TELEPHONY_SERVICE);
+//        return t.getLine1Number();
+//    }
 }
