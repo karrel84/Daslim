@@ -18,5 +18,9 @@ public interface MainPresenter {
         void clearFragment();
 
         void setFragment(List<ScheduleInfo> scheduleInfos);
+
+        void showProgress();
+
+        void hideProgress();
     }
 }

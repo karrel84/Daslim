@@ -37,6 +37,8 @@ public class MainPresenterImpl implements MainPresenter {
 
         subscribeScheduleEvent();
         DataManager.getInstance();
+
+        view.showProgress();
     }
 
     private void subscribeScheduleEvent() {
@@ -45,6 +47,7 @@ public class MainPresenterImpl implements MainPresenter {
 //            view.clearFragment();
             RLog.d("scheduleInfos > " + scheduleInfos);
             view.setFragment(scheduleInfos);
+            view.hideProgress();
         });
     }
 

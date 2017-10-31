@@ -10,7 +10,7 @@
     <item
         android:id="@+id/action_two"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_menu_send"
+        android:icon="@android:drawable/ic_dialog_info"
         android:title="예약하기" />
     <item
         android:id="@+id/action_three"
