@@ -20,5 +20,6 @@ public interface SchedulePresenter {
         void addInfoItem(ScheduleInfoItem item);
 
         void addReserveItem(ReservationItem item);
+
     }
 }

@@ -77,7 +77,7 @@ public class ScheduleFragment extends Fragment implements SchedulePresenter.View
      */
     private void setupAdapter() {
         adapter = new ScheduleListAdapter();
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.setAdapter(adapter);
     }
 
@@ -94,5 +94,9 @@ public class ScheduleFragment extends Fragment implements SchedulePresenter.View
 
     public String getTitle() {
         return presenter.getTitle();
+    }
+
+    public void updateInfo(ScheduleInfo info) {
+        adapter.updateInfo(info);
     }
 }

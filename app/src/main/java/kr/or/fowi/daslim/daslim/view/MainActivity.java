@@ -11,6 +11,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.karrel.mylibrary.RLog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +76,7 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
 
     @Override
     public void setFragment(List<ScheduleInfo> scheduleInfos) {
-        for (ScheduleInfo info : scheduleInfos){
+        for (ScheduleInfo info : scheduleInfos) {
             adapter.addFragment(ScheduleFragment.newInstance(info));
         }
         adapter.notifyDataSetChanged();

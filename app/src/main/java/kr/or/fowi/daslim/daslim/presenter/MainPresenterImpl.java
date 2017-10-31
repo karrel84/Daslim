@@ -42,7 +42,7 @@ public class MainPresenterImpl implements MainPresenter {
     private void subscribeScheduleEvent() {
         // 혀냊 블루투스의 연결상태의 변경을 수신한다
         FirebaseEvent.getInstance().getSheduleObservable().subscribe(scheduleInfos -> {
-            view.clearFragment();
+//            view.clearFragment();
             RLog.d("scheduleInfos > " + scheduleInfos);
             view.setFragment(scheduleInfos);
         });

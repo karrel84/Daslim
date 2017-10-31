@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.karrel.mylibrary.RLog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import kr.or.fowi.daslim.daslim.databinding.ItemReservationedScheduleBinding;
 import kr.or.fowi.daslim.daslim.databinding.ItemReserveTitleBinding;
 import kr.or.fowi.daslim.daslim.databinding.ItemScheduleBinding;
 import kr.or.fowi.daslim.daslim.model.ReservationItem;
+import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 import kr.or.fowi.daslim.daslim.model.ScheduleInfoItem;
 import kr.or.fowi.daslim.daslim.view.adapter.viewholder.ReserveContentViewHolder;
 import kr.or.fowi.daslim.daslim.view.adapter.viewholder.ReserveTitleViewHolder;
@@ -41,14 +44,18 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
+        RLog.e("onCreateViewHolder");
         RecyclerView.ViewHolder holder = null;
         if (viewType == TYPE_SCHEDULE) {
+            RLog.e("TYPE_SCHEDULE");
             ItemScheduleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_schedule, parent, false);
             holder = new ScheduleListViewHolder(binding);
         } else if (viewType == TYPE_RESERVE_TITLE) {
+            RLog.e("TYPE_RESERVE_TITLE");
             ItemReserveTitleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_reserve_title, parent, false);
             holder = new ReserveTitleViewHolder(binding);
         } else { // 예약내역
+            RLog.e("TYPE_RESERVE_CONTENT");
             ItemReservationedScheduleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_reservationed_schedule, parent, false);
             holder = new ReserveContentViewHolder(binding);
         }
@@ -93,5 +100,32 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void addReserveItem(ReservationItem item) {
         myReserveList.add(item);
         notifyDataSetChanged();
+    }
+
+    /**
+     * 아이템의 변경에 대한 갱신을 진행
+     */
+    public void updateInfo(ScheduleInfo info) {
+        RLog.d("myReserveList");
+//        scheduleList.clear();
+        for (ScheduleInfoItem item : info.scheduleInfoItems) {
+//            scheduleList.add(item);
+//            notifyDataSetChanged();
+            addItem(item);
+        }
+
+        myReserveList.clear();
+        for (ScheduleInfoItem item : info.scheduleInfoItems) {
+            if (item.isReservationed()) {
+//                myReserveList.add(item.getReservationInfo());
+//                notifyDataSetChanged();
+                addReserveItem(item.getReservationInfo());
+            }
+        }
+
+        RLog.e("title " + info.title);
+//        RLog.e("notifyItemRangeChange " + getItemCount());
+//        notifyItemRangeChanged(0, getItemCount());
+//        notifyDataSetChanged();
     }
 }

@@ -4,9 +4,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.karrel.mylibrary.RLog;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
 import kr.or.fowi.daslim.daslim.view.ScheduleFragment;
 
 /**
@@ -14,7 +17,7 @@ import kr.or.fowi.daslim.daslim.view.ScheduleFragment;
  */
 
 public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
-    private final List<Fragment> fragments = new ArrayList<>();
+    private final List<ScheduleFragment> fragments = new ArrayList<>();
     private final List<String> titles = new ArrayList<>();
 
     public SchedulePagerAdapter(FragmentManager fm) {
@@ -37,8 +40,20 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
     }
 
     public void addFragment(ScheduleFragment tabFragment) {
-        fragments.add(tabFragment);
-        titles.add(tabFragment.getTitle());
+        boolean isRemove = false;
+        for (int i = 0; i < fragments.size(); i++) {
+            if (fragments.get(i).getTitle().equals(tabFragment.getTitle())) {
+                fragments.remove(i);
+                fragments.add(i, tabFragment);
+                isRemove = true;
+                break;
+            }
+        }
+        if (!isRemove) {
+            fragments.add(tabFragment);
+            titles.add(tabFragment.getTitle());
+        }
+
         notifyDataSetChanged();
     }
 
@@ -51,5 +66,23 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getItemPosition(Object object) {
         return POSITION_NONE;
+    }
+
+    public boolean haveItem(String title) {
+        for (String t2 : titles) {
+            if (t2.equals(title)) return true;
+        }
+
+        return false;
+    }
+
+    public void updateFragment(ScheduleInfo info) {
+        RLog.d("updateFragment");
+        for (int i = 0; i < titles.size(); i++) {
+            if (titles.get(i).equals(info.title)) {
+                fragments.get(i).updateInfo(info);
+                break;
+            }
+        }
     }
 }
