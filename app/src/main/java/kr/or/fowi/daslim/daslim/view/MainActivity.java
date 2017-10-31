@@ -1,31 +1,23 @@
 package kr.or.fowi.daslim.daslim.view;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.view.View;
-
-import java.util.List;
+import android.support.v4.view.ViewPager;
 
 import kr.or.fowi.daslim.daslim.R;
 import kr.or.fowi.daslim.daslim.base.BaseActivity;
 import kr.or.fowi.daslim.daslim.databinding.ActivityMainBinding;
-import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
-import kr.or.fowi.daslim.daslim.presenter.MainPresenter;
-import kr.or.fowi.daslim.daslim.presenter.MainPresenterImpl;
-import kr.or.fowi.daslim.daslim.view.adapter.SchedulePagerAdapter;
+import kr.or.fowi.daslim.daslim.view.adapter.MainPagerAdapter;
 
-public class MainActivity extends BaseActivity implements MainPresenter.View {
+public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
-    private MainPresenter presenter;
-    private SchedulePagerAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        presenter = new MainPresenterImpl(this);
     }
 
     @Override
@@ -33,53 +25,61 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
         super.onLoadOnce();
 
         setupToolbar();
+        setupBottomMenu();
         setupViewPager();
     }
 
     private void setupViewPager() {
-        adapter = new SchedulePagerAdapter(getSupportFragmentManager());
-        binding.viewPager.setAdapter(adapter);
-        binding.tabLayout.setupWithViewPager(binding.viewPager);
+        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
+        binding.container.setAdapter(adapter);
+        binding.container.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            public int prePosition = 0;
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                prePosition = position;
+                binding.bottomNavigation.getMenu().getItem(prePosition).setCheckable(false);
+                binding.bottomNavigation.getMenu().getItem(position).setCheckable(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    // 하단메뉴 초기화
+    private void setupBottomMenu() {
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_one:
+                    binding.container.setCurrentItem(0);
+                    return true;
+                case R.id.action_two:
+                    binding.container.setCurrentItem(1);
+                    return true;
+                case R.id.action_three:
+                    binding.container.setCurrentItem(2);
+                    return true;
+            }
+            return false;
+        });
     }
 
     @Override
     protected void onLoad() {
         super.onLoad();
-        presenter.checkLogined();
     }
 
     private void setupToolbar() {
         setSupportActionBar(binding.toolbar);
     }
 
-    @Override
-    public void startLogin() {
-        Intent intent = new Intent(this, JoinActivity.class);
-        startActivity(intent);
-    }
 
-    @Override
-    public void clearFragment() {
-        adapter.clearFragments();
-    }
-
-    @Override
-    public void setFragment(List<ScheduleInfo> scheduleInfos) {
-        for (ScheduleInfo info : scheduleInfos) {
-            adapter.addFragment(ScheduleFragment.newInstance(info));
-        }
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void showProgress() {
-        binding.progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-        if (binding.progressBar.getVisibility() != View.GONE) {
-            binding.progressBar.setVisibility(View.GONE);
-        }
-    }
 }

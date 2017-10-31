@@ -5,29 +5,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.karrel.mylibrary.RLog;
 
-import java.util.List;
-
 import kr.or.fowi.daslim.daslim.etc.DataManager;
 import kr.or.fowi.daslim.daslim.etc.LoginManager;
 import kr.or.fowi.daslim.daslim.event.FirebaseEvent;
-import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by kimmihye on 2017. 10. 1..
  */
 
-public class MainPresenterImpl implements MainPresenter {
-    private MainPresenter.View view;
+public class ReservePresenterImpl implements ReservePresenter {
+    private ReservePresenter.View view;
     private LoginManager loginManager;
 
     private DatabaseReference mReference;
     private FirebaseDatabase mDatabase;
     private Query mQuery;
 
-    public MainPresenterImpl(MainPresenter.View view) {
+    public ReservePresenterImpl(ReservePresenter.View view) {
         this.view = view;
         loginManager = LoginManager.getInstance();
 

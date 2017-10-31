@@ -8,7 +8,7 @@ import kr.or.fowi.daslim.daslim.model.ScheduleInfo;
  * Created by kimmihye on 2017. 10. 1..
  */
 
-public interface MainPresenter {
+public interface ReservePresenter {
     void checkLogined();
 
     interface View {
